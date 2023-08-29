@@ -2,41 +2,31 @@
 <html>
 <head>
   <title>JSON Data Display</title>
+  <style>
+    body {
+      background-color: white; /* Set the background color to white */
+    }
+    #dataDisplay {
+      color: white; /* Set the text color to white */
+      background-color: white; /* Set the background color to white */
+    }
+  </style>
 </head>
 <body>
   <div id="dataDisplay"></div>
 
   <script>
-    const key = 'KYAMI'; // Your key value
-    const url = 'https://ah-sam-default-rtdb.asia-southeast1.firebasedatabase.app/.json'; // URL for JSON data
-    const fallbackUrl = 'https://paingtvpro.github.io/premv/'; // Fallback URL if key is wrong
-
-    // Prepare the request body
-    const requestBody = JSON.stringify({ key: key });
-
-    // Make the POST request
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: requestBody
-    })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        window.location.href = fallbackUrl; // Redirect to fallback URL
-      }
-    })
-    .then(data => {
-      // Display JSON data on the web page
-      const dataDisplay = document.getElementById('dataDisplay');
-      dataDisplay.innerHTML = JSON.stringify(data, null, 2); // Prettify JSON
-    })
-    .catch(error => {
-      console.error('Error fetching JSON:', error);
-    });
+    // Fetch JSON data from the URL
+    fetch('https://test-73801-default-rtdb.firebaseio.com/.json')
+      .then(response => response.json())
+      .then(data => {
+        // Display JSON data on the web page
+        const dataDisplay = document.getElementById('dataDisplay');
+        dataDisplay.innerHTML = JSON.stringify(data, null, 2); // Prettify JSON
+      })
+      .catch(error => {
+        console.error('Error fetching JSON:', error);
+      });
   </script>
 </body>
 </html>
